@@ -779,6 +779,8 @@ class QAnsysRenderer(QRendererAnalysis):
                     adesign = self.pinfo.project.new_em_design(design_name)
                 elif solution_type == "drivenmodal":
                     adesign = self.pinfo.project.new_dm_design(design_name)
+                elif solution_type == "hfss hybrid modal network":
+                    adesign = self.pinfo.project.new_dm_design(design_name)
                 else:
                     self.logger.error(
                         f"The solution_type = {solution_type} is not supported by this renderer"
@@ -883,6 +885,8 @@ class QAnsysRenderer(QRendererAnalysis):
                 if self.pinfo.design.solution_type == "Eigenmode":
                     setup = self.add_eigenmode_setup(name, **other_setup)
                 elif self.pinfo.design.solution_type == "DrivenModal":
+                    setup = self.add_drivenmodal_setup(name, **other_setup)
+                elif self.pinfo.design.solution_type == "HFSS Hybrid Modal Network":
                     setup = self.add_drivenmodal_setup(name, **other_setup)
                 elif self.pinfo.design.solution_type == "Q3D":
                     setup = self.add_q3d_setup(name, **other_setup)
