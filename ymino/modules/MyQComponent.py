@@ -21,22 +21,26 @@ class MyQComponent(QComponent):
         #print( gdspy.get_gds_units(filename) )
         #print( design.get_units())
         lib.read_gds(filename, 'import')
-        print(lib)
         cell = lib.top_level()[0]
-
-        polygon_list = []        
-        polygon_pocket_list = []                
+          
+        ## Add Geometry
+        pocket_list = []
+        metal_list = []
         for polygon in cell.polygons:
             for poly_points, layer in zip(polygon.polygons, polygon.layers):
                 poly = draw.Polygon(poly_points * scale)
                 if layer == 1:
-                    self.add_qgeometry('poly', dict(poly=poly), subtract = True, layer=1)
-                    polygon_pocket_list.extend(poly_points * scale)
+                    pocket_list.append(poly)
                 else:
-                    self.add_qgeometry('poly', dict(poly=poly), subtract = False, layer=1)    
-                    polygon_list.extend(poly_points * scale)                
+                    metal_list.append(poly)
 
-        
+        pocket_list = draw.unary_union(pocket_list)
+        metal_list = draw.unary_union(metal_list)
+       
+        self.add_qgeometry('poly', dict(launch_pad=metal_list), subtract = False, layer=1) 
+        self.add_qgeometry('poly', dict(pocket=pocket_list), subtract = True, layer=1)
+
+        ## Add Port
         with open("./mygds/TcSampleDesign.yaml", 'r') as f:
             port_data = yaml.safe_load(f)
         for name, info in port_data.items():  
