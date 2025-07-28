@@ -2,6 +2,7 @@ from qiskit_metal import draw, Dict
 from qiskit_metal.qlibrary.core import QComponent
 import gdspy
 import yaml
+import numpy as np
 
 class MyQComponent(QComponent):
     """Demonstration1 - Straight segment with variable width/length"""
@@ -15,7 +16,7 @@ class MyQComponent(QComponent):
 
     def make(self):
         lib = gdspy.GdsLibrary()
-        filename = '../PHIDL-based/output/qiskit-metal/TcSampleDesign.gds'
+        filename = './mygds/TcSampleDesign.gds'
         scale = 1e-3
         #print( gdspy.get_gds_units(filename) )
         #print( design.get_units())
@@ -36,8 +37,8 @@ class MyQComponent(QComponent):
                     polygon_list.extend(poly_points * scale)                
 
         
-        with open("../PHIDL-based/output/qiskit-metal/TcSampleDesign.yaml", 'r') as f:
+        with open("./mygds/TcSampleDesign.yaml", 'r') as f:
             port_data = yaml.safe_load(f)
-
-        for name, info in port_data.items():     
-            self.add_pin(name, [info["start"],info["end"]], info["width"], gap=info["gap"])
+        for name, info in port_data.items():  
+            print(name, info)   
+            self.add_pin(name, [np.array(info["start"])*scale,np.array(info["end"])*scale], info["width"]*scale, gap=info["gap"]*scale)

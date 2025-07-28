@@ -1,55 +1,18 @@
-LaunchPad3:
-  end: !!python/tuple
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - &id001 !!python/object/apply:numpy.dtype
-      args:
-      - f8
-      - false
-      - true
-      state: !!python/tuple
-      - 3
-      - <
-      - null
-      - null
-      - null
-      - -1
-      - -1
-      - 0
-    - !!binary |
-      AAAAAACAgcA=
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAABon0A=
-  gap: -230
-  start: !!python/tuple
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      /v//////bcA=
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAABon0A=
-  width: 320
-LaunchPad7:
-  end: !!python/tuple
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      /v//////bcA=
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAABon8A=
-  gap: -230
-  start: !!python/tuple
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAACAgcA=
-  - !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAABon8A=
-  width: 320
+LaunchPad0:
+  end:
+  - -560.0
+  - 2010.0
+  gap: -230.0
+  start:
+  - -239.99999999999994
+  - 2010.0
+  width: 320.0
+LaunchPad1:
+  end:
+  - -239.99999999999994
+  - -2010.0
+  gap: -230.0
+  start:
+  - -560.0
+  - -2010.0
+  width: 320.0
