@@ -7,6 +7,8 @@ import numpy as np
 class MyQComponent(QComponent):
     """Demonstration1 - Straight segment with variable width/length"""
 
+    default_options = Dict(filename='TcSampleDesign')
+
     ### def __init__() <- comes from QComponent
     ###   Initiaizes base variables such as self.id, self.name and self.options
     ###   Also launches the first execution of make()
@@ -15,8 +17,11 @@ class MyQComponent(QComponent):
     ###   Clear output from previous runs of make() (geom/pin/net) and re-runs it
 
     def make(self):
+
+        p = self.p
+
         lib = gdspy.GdsLibrary()
-        filename = './mygds/TcSampleDesign.gds'
+        filename = f'./mygds/{p.filename}.gds'
         scale = 1e-3
         #print( gdspy.get_gds_units(filename) )
         #print( design.get_units())
@@ -41,7 +46,7 @@ class MyQComponent(QComponent):
         self.add_qgeometry('poly', dict(pocket=pocket_list), subtract = True, layer=1)
 
         ## Add Port
-        with open("./mygds/TcSampleDesign.yaml", 'r') as f:
+        with open(f"./mygds/{p.filename}.yaml", 'r') as f:
             port_data = yaml.safe_load(f)
         for name, info in port_data.items():  
             print(name, info)   
