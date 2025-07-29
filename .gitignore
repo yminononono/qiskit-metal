@@ -116,6 +116,7 @@ tutorials/**/*.tif
 tutorials/**/*.csv
 docs/**/*.csv
 *.gds
+!ymino/mygds/**.gds
 !tutorials/resources/**
 __pycache__
 
