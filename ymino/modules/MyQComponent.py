@@ -49,5 +49,9 @@ class MyQComponent(QComponent):
         with open(f"./mygds/{p.filename}.yaml", 'r') as f:
             port_data = yaml.safe_load(f)
         for name, info in port_data.items():  
-            print(name, info)   
-            self.add_pin(name, [np.array(info["start"])*scale,np.array(info["end"])*scale], info["width"]*scale, gap=info["gap"]*scale)
+            if "LaunchPad" in name:
+                self.add_pin(name, [np.array(info["start"])*scale,np.array(info["end"])*scale], info["width"]*scale, gap=info["gap"]*scale)
+            elif "Junction" in name:
+                print(name, info)
+                rect_jj = draw.LineString([np.array(info["start"])*scale, np.array(info["end"])*scale])
+                self.add_qgeometry('junction', dict(rect_jj=rect_jj), width=info["width"]*scale, layer=1)
