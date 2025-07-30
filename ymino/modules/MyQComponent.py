@@ -54,4 +54,4 @@ class MyQComponent(QComponent):
             elif "Junction" in name:
                 print(name, info)
                 rect_jj = draw.LineString([np.array(info["start"])*scale, np.array(info["end"])*scale])
-                self.add_qgeometry('junction', dict(rect_jj=rect_jj), width=info["width"]*scale, layer=1)
+                self.add_qgeometry('junction', {name : rect_jj}, width=info["width"]*scale, layer=1)
