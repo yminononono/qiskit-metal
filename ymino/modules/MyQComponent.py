@@ -45,10 +45,17 @@ def MyQComponents(design, filelist):
                 port_data = data[component]["ports"]
             else:
                 port_data = {}
+
+            if "jj" in data[component]:
+                jj_data =  data[component]["jj"]
+            else:
+                jj_data = {}
+
             options = Dict(
                 polygons_metal = metal_list[layer],
                 polygons_pocket = pocket_list[layer],
                 port_data = port_data,
+                jj_data = jj_data,
                 scale = 1e-3,
             )
             MyQComponent(design, component, options = options)
@@ -63,6 +70,7 @@ class MyQComponent(QComponent):
         polygons_metal = [],
         polygons_pocket = [],
         port_data = {},
+        jj_data = {},
         scale = 1e-3,
     )
 
@@ -88,7 +96,8 @@ class MyQComponent(QComponent):
         for name, info in p.port_data.items():  
             if "LaunchPad" in name:
                 self.add_pin(name, [np.array(info["start"])*p.scale,np.array(info["end"])*p.scale], info["width"]*p.scale, gap=info["gap"]*p.scale)
-            elif "Junction" in name:
-                print(name, info)
-                rect_jj = draw.LineString([np.array(info["start"])*p.scale, np.array(info["end"])*p.scale])
-                self.add_qgeometry('junction', {name : rect_jj}, width=info["width"]*p.scale, layer=1)
+
+        if p.jj_data:  
+            info = p.jj_data
+            rect_jj = draw.LineString([np.array(info["start"])*p.scale, np.array(info["end"])*p.scale])
+            self.add_qgeometry('junction', {"JJ" : rect_jj}, width=info["width"]*p.scale, layer=1)
