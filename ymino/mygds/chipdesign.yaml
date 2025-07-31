@@ -44,10 +44,10 @@ Qubit3:
   jj:
     start:
     - -1565.0000000000005
-    - 323.0
+    - 307.0
     end:
     - -1565.0000000000005
-    - 307.0
+    - 323.0
     width: 10.0
 Qubit4:
   layer: 4
@@ -59,7 +59,3 @@ Qubit4:
     - -1565.0000000000005
     - 1298.0
     width: 10.0
-Entangle1to2:
-  layer: 5
-Entangle3to4:
-  layer: 6
