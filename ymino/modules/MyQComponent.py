@@ -4,9 +4,9 @@ import gdspy
 import yaml
 import numpy as np
 
-def MyQComponents(design, filelist):
+def MyQComponents(design, filelist, componentlist = []):
 
-    component_list = []
+    components = []
     scale = 1e-3
 
     for filename in filelist:
@@ -58,10 +58,13 @@ def MyQComponents(design, filelist):
                 jj_data = jj_data,
                 scale = 1e-3,
             )
+
+            if componentlist and (component not in componentlist):
+                continue
             MyQComponent(design, component, options = options)
-            component_list.append( component )    
+            components.append( component )    
     
-    return component_list
+    return components
 
 class MyQComponent(QComponent):
     """Demonstration1 - Straight segment with variable width/length"""
