@@ -12,3 +12,13 @@ FeedLine:
       gap: 100.0
 Qubit:
   layer: 1
+  ports:
+    LaunchPad1:
+      start:
+      - -10.0
+      - -433.0
+      end:
+      - 10.0
+      - -433.0
+      width: 20.0
+      gap: 20.0
